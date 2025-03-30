@@ -2,3 +2,4 @@ fastapi
 uvicorn
 akshare
 jinja2
+python-multipart
