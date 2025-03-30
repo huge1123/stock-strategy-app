@@ -1,20 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>股票策略分析系统</title>
+    <title>Stock Strategy</title>
 </head>
 <body>
-    <h1>股票策略分析系统</h1>
-    <form method="post" action="/submit">
-        <input type="text" name="code" placeholder="输入股票代码" required>
-        <button type="submit">添加</button>
-    </form>
-    <h2>策略建议：{{ strategy }}</h2>
+    <h1>今日选股结果</h1>
     <ul>
-        {% for stock in stocks %}
-        <li>{{ stock[0] }} 涨跌幅：{{ stock[1] }}%</li>
-        {% endfor %}
+    {% for stock in stocks %}
+        <li>{{ stock }}</li>
+    {% endfor %}
     </ul>
+    <h2>策略：{{ strategy }}</h2>
 </body>
 </html>
