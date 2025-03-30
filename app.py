@@ -1,3 +1,19 @@
+import sqlite3
+
+def init_db():
+    conn = sqlite3.connect("stock.db")  # 如果你的代码是 stock.db，保持一致
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS stock_selection (
+            stock_code TEXT,
+            selection_date TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+# 初始化数据库
+init_db()
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
