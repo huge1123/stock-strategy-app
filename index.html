@@ -1,15 +1,66 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
-    <title>Stock Strategy</title>
+  <meta charset="UTF-8">
+  <title>股票监控平台</title>
+  <script src="/static/chart.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>今日选股结果</h1>
-    <ul>
-    {% for stock in stocks %}
-        <li>{{ stock }}</li>
+  <h1>📈 股票监控平台</h1>
+
+  <form method="post" action="/add_stock">
+    <input name="code" placeholder="输入股票代码，如 000001" required>
+    <button type="submit">添加</button>
+  </form>
+
+  <h2>📋 已添加股票</h2>
+  <ul>
+    {% for code in stock_codes %}
+    <li>{{ code }}</li>
     {% endfor %}
-    </ul>
-    <h2>策略：{{ strategy }}</h2>
+  </ul>
+
+  <h2>📊 实时数据</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>股票代码</th><th>最新价</th><th>涨跌幅</th><th>成交量</th><th>状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in stock_data %}
+      <tr>
+        <td>{{ s.code }}</td>
+        <td>{{ s.price }}</td>
+        <td>{{ s.change }}%</td>
+        <td>{{ s.volume }}</td>
+        <td>{{ s.status }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>📌 策略建议</h2>
+  <p>{{ strategy }}</p>
+
+  <h2>📈 图表</h2>
+  <canvas id="chart" width="400" height="200"></canvas>
+
+  <script>
+    const ctx = document.getElementById('chart');
+    const chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['上涨', '下跌', '观望'],
+        datasets: [{
+          label: '股票状态占比',
+          data: [{{ up_count }}, {{ down_count }}, {{ neutral_count }}],
+          backgroundColor: ['green', 'red', 'gray']
+        }]
+      }
+    });
+  </script>
 </body>
 </html>
