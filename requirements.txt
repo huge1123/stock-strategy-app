@@ -1,7 +1,7 @@
 fastapi
 uvicorn
-akshare
-pandas
-schedule
 jinja2
+akshare
+schedule
 python-multipart
+pandas
