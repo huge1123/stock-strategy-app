@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-jinja2
-akshare
-schedule
-python-multipart
-pandas
